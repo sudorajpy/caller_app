@@ -1,25 +1,35 @@
-import 'package:caller_app/screens/home/home_screen.dart';
-import 'package:caller_app/screens/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'core/app_export.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((value) {
+    Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: SplashScreen(),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: theme,
+      translations: AppLocalization(),
+      locale: Get.deviceLocale, //for setting localization strings
+      fallbackLocale: Locale('en', 'US'),
+      title: 'caller_app',
+      initialBinding: InitialBindings(),
+      initialRoute: AppRoutes.initialRoute,
+      getPages: AppRoutes.pages,
     );
   }
 }
-
