@@ -123,7 +123,7 @@ class LoginFormScreen extends GetWidget<LoginFormController> {
     ProfileController profileController = Get.put(ProfileController());
 
     if (controller.userIDController.text.isNotEmpty && controller.passwordController.text.isNotEmpty) {
-      profileController.createAccount(email: controller.userIDController.text, password: controller.passwordController.text);
+      // profileController.createAccount(email: controller.userIDController.text, password: controller.passwordController.text);
       // .then((value) {
       //   print("value: $value");
       //   // if (value != null) {
@@ -132,6 +132,7 @@ class LoginFormScreen extends GetWidget<LoginFormController> {
       //   //   );
       //   // }
       // });
+      profileController.loginUser(email: controller.userIDController.text, password: controller.passwordController.text);
     } else {
       
     }
