@@ -1,6 +1,9 @@
+import 'package:caller_app/presentation/signup_form_screen/binding/signup_form_binding.dart';
 import 'package:caller_app/presentation/splash_screen/splash_screen.dart';
 import 'package:caller_app/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:caller_app/presentation/login_screen/login_screen.dart';
+import 'package:caller_app/presentation/signup_form_screen/signup_form_screen.dart';
+
 import 'package:caller_app/presentation/login_screen/binding/login_binding.dart';
 import 'package:caller_app/presentation/login_form_screen/login_form_screen.dart';
 import 'package:caller_app/presentation/login_form_screen/binding/login_form_binding.dart';
@@ -16,6 +19,8 @@ class AppRoutes {
   static const String splashScreen = '/splash_screen';
 
   static const String loginScreen = '/login_screen';
+
+  static const String signupFormScreen = '/signup_form_screen';
 
   static const String loginFormScreen = '/login_form_screen';
 
@@ -48,6 +53,13 @@ class AppRoutes {
       page: () => LoginScreen(),
       bindings: [
         LoginBinding(),
+      ],
+    ),
+    GetPage(
+      name: signupFormScreen,
+      page: () => SignupFormScreen(),
+      bindings: [
+        SignupFormBinding(),
       ],
     ),
     GetPage(

@@ -1,30 +1,54 @@
 import 'package:caller_app/routes/app_routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // createAccount({email, password}) {
-  //   try {
-  //     _auth.createUserWithEmailAndPassword(email: email, password: password)
-  //         .then((value) => print('value: $value'));
-  //   } catch (e) {
-  //     print('error: $e');
-  //   }
-  //   // _auth.createUserWithEmailAndPassword(email: email, password: password)
-  //   // .then((value) => print('value: $value'));
+  Future<void> signupUser({email, password, name, phone}) async {
+    // FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // }
-  // loginAccount({email, password}){
-  //   _auth.signInWithEmailAndPassword(email: email, password: password)
-  //   .then((value) => print('value: $value'));
-  // }
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      print('----------------');
+      print(userCredential);
+      // Now, update the user information
+      User user = userCredential.user!;
 
-  // import 'package:firebase_auth/firebase_auth.dart';
+      await user.updateDisplayName(name);
+      // await user.updatePhoneNumber(phone);
+
+      // await user.updateProfile(
+      //     displayName: 'Your Display Name', photoURL: 'URL_to_your_photo');
+
+      // // Verify email if needed
+      // await user.sendEmailVerification();
+
+      print('Account created successfully!');
+      print(userCredential.user!.uid);
+
+      await saveData(
+          email: email,
+          password: password,
+          name: name,
+          phone: phone,
+          userId: userCredential.user!.uid);
+
+      Get.toNamed(
+        AppRoutes.callContainerScreen,
+      );
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar('Something wen wrong', 'error: $e.');
+    }
+  }
 
   Future<void> loginUser({email, password}) async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
+    // FirebaseAuth _auth = FirebaseAuth.instance;
 
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -60,5 +84,16 @@ class ProfileController extends GetxController {
         Get.snackbar('Invalid Creditials', 'Password is wrong');
       }
     }
+  }
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  saveData({email, password, name, phone, userId}) async {
+    await firestore.collection('users').doc(userId).set({
+      'email': email,
+      'password': password,
+      'name': name,
+      'phone': phone,
+    });
   }
 }

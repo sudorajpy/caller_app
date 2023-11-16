@@ -1,6 +1,7 @@
 import 'package:caller_app/controller/account_controller.dart';
+import 'package:caller_app/presentation/signup_form_screen/models/signup_form_model.dart';
 
-import 'controller/login_form_controller.dart';
+import 'controller/signup_form_controller.dart';
 import 'package:caller_app/core/app_export.dart';
 import 'package:caller_app/widgets/app_bar/appbar_title_image.dart';
 import 'package:caller_app/widgets/app_bar/custom_app_bar.dart';
@@ -8,8 +9,8 @@ import 'package:caller_app/widgets/custom_elevated_button.dart';
 import 'package:caller_app/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginFormScreen extends GetWidget<LoginFormController> {
-  const LoginFormScreen({Key? key}) : super(key: key);
+class SignupFormScreen extends GetWidget<SignupFormController> {
+  const SignupFormScreen({Key? key}) : super(key: key);
 
   // var controller = Get.put(ProfileController());
 
@@ -37,11 +38,24 @@ class LoginFormScreen extends GetWidget<LoginFormController> {
                       Text("msg_lorem_ipsum_is_simply".tr,
                           style: CustomTextStyles.bodySmallOnPrimary),
                       SizedBox(height: 39.v),
-                      Text("lbl_user_id".tr, style: theme.textTheme.titleSmall),
+                      Text("Name".tr, style: theme.textTheme.titleSmall),
+                      SizedBox(height: 10.v),
+                      CustomTextFormField(
+                          controller: controller.nameController,
+                          hintText: "John William".tr),
+                      SizedBox(height: 19.v),
+                      Text("Phone".tr, style: theme.textTheme.titleSmall),
+                      SizedBox(height: 10.v),
+                      CustomTextFormField(
+                        textInputType: TextInputType.phone,
+                          controller: controller.phoneController,
+                          hintText: "1234567890".tr),
+                      SizedBox(height: 19.v),
+                      Text("Email".tr, style: theme.textTheme.titleSmall),
                       SizedBox(height: 10.v),
                       CustomTextFormField(
                           controller: controller.userIDController,
-                          hintText: "lbl_brucewayne0123".tr),
+                          hintText: "example@gmail.com".tr),
                       SizedBox(height: 19.v),
                       Text("lbl_password".tr,
                           style: theme.textTheme.titleSmall),
@@ -78,12 +92,6 @@ class LoginFormScreen extends GetWidget<LoginFormController> {
                           onPressed: () {
                             onTapLogin();
                           }),
-
-                      TextButton(onPressed: (() {
-                        debugPrint("Sign up button pressed");
-                        Get.toNamed(AppRoutes.signupFormScreen);
-                      }), child: Text("Don't have an account? Register here".tr)),
-                       
                       Spacer(),
                       SizedBox(height: 16.v),
                       Align(
@@ -138,7 +146,7 @@ class LoginFormScreen extends GetWidget<LoginFormController> {
       //   //   );
       //   // }
       // });
-      profileController.loginUser(email: controller.userIDController.text, password: controller.passwordController.text);
+      profileController.signupUser(email: controller.userIDController.text, password: controller.passwordController.text, name: controller.nameController.text, phone: controller.phoneController.text);
     } else {
       
     }
