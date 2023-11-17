@@ -1,3 +1,5 @@
+import 'package:caller_app/controller/account_controller.dart';
+
 import '../user_profile_page/widgets/userprofile_item_widget.dart';
 import 'controller/user_profile_controller.dart';
 import 'models/user_profile_model.dart';
@@ -62,7 +64,7 @@ class UserProfilePage extends StatelessWidget {
                                     CustomTextStyles.bodySmallOnErrorContainer),
                             SizedBox(height: 30.v),
                             _buildUserProfile()
-                          ]))),
+                          ],),),),
                   Align(
                       alignment: Alignment.bottomCenter,
                       child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -231,7 +233,8 @@ class UserProfilePage extends StatelessWidget {
                         SizedBox(height: 10.v),
                         InkWell(
                           onTap: () {
-                            // controller.onTapLogOut();
+                            
+                            ProfileController().signOut();
                           
                           },
                           child: Align(
@@ -242,10 +245,6 @@ class UserProfilePage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Icon(Icons.logout, color: Colors.grey,),
-                                  // CustomImageView(
-                                  //     imagePath: ImageConstant.imgSupport,
-                                  //     height: 20.adaptSize,
-                                  //     width: 20.adaptSize),
                                   Padding(
                                     padding:
                                         EdgeInsets.only(left: 19.h, bottom: 6.v),
@@ -297,9 +296,9 @@ class UserProfilePage extends StatelessWidget {
         () => GridView.builder(
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisExtent: 83.v,
+              mainAxisExtent: 86.v,
               crossAxisCount: 2,
-              mainAxisSpacing: 10.h,
+              mainAxisSpacing: 14.h,
               crossAxisSpacing: 10.h),
           physics: NeverScrollableScrollPhysics(),
           itemCount: controller

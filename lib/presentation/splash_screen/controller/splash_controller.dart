@@ -1,5 +1,6 @@
 import 'package:caller_app/core/app_export.dart';
 import 'package:caller_app/presentation/splash_screen/models/splash_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 /// A controller class for the SplashScreen.
 ///
@@ -11,9 +12,20 @@ class SplashController extends GetxController {
   @override
   void onReady() {
     Future.delayed(const Duration(milliseconds: 3000), () {
-      Get.offNamed(
+
+
+      if (FirebaseAuth.instance.currentUser != null) {
+        Get.toNamed(
+        AppRoutes.callContainerScreen,
+      );
+      } else {
+        Get.offNamed(
         AppRoutes.loginFormScreen,
       );
+      }
+
+
+      
     });
   }
 }

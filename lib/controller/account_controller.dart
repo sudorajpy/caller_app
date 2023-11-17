@@ -6,6 +6,14 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+    Get.offAllNamed(AppRoutes.loginScreen);
+  }
+
   Future<void> signupUser({email, password, name, phone}) async {
     // FirebaseAuth _auth = FirebaseAuth.instance;
 
