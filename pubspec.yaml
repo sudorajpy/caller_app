@@ -17,6 +17,8 @@ dependencies:
   firebase_auth: ^4.13.0
   cloud_firestore: ^4.13.1
   firebase_database: ^10.3.4
+  flutter_dialpad: ^1.0.5
+  flutter_dtmf: ^2.0.2
 dev_dependencies: 
   flutter_test: 
     sdk: flutter

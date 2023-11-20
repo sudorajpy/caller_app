@@ -1,3 +1,5 @@
+import 'package:caller_app/presentation/dialer_screen/dialer_screen.dart';
+
 import '../call_page/widgets/ninetyfour_item_widget.dart';
 import 'controller/call_controller.dart';
 import 'models/call_model.dart';
@@ -24,6 +26,7 @@ class CallPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        // appBar: AppBar(),
         resizeToAvoidBottomInset: false,
         body: Container(
           width: double.maxFinite,
@@ -74,6 +77,26 @@ class CallPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        floatingActionButton: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (builder)=> DialerScreen()));
+          },
+          child: Container(
+              height: 80,
+              width: 80,
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey[200],
+                // color: appTheme.primaryColor,
+              ),
+              // color: Colors.green,
+              child: Image.asset(
+                'assets/images/dialer.png',
+                height: 40,
+                width: 40,
+              )),
         ),
       ),
     );

@@ -1,3 +1,6 @@
+// import 'package:caller_app/presentation/dialer_screen/binding/dialer_screen_binding.dart';
+import 'package:caller_app/presentation/dialer_screen/binding/dialer_screen_binding.dart';
+import 'package:caller_app/presentation/dialer_screen/dialer_screen.dart';
 import 'package:caller_app/presentation/signup_form_screen/binding/signup_form_binding.dart';
 import 'package:caller_app/presentation/splash_screen/splash_screen.dart';
 import 'package:caller_app/presentation/splash_screen/binding/splash_binding.dart';
@@ -40,6 +43,8 @@ class AppRoutes {
 
   static const String initialRoute = '/initialRoute';
 
+  static const String dialerScreen = '/dialerScreen';
+
   static List<GetPage> pages = [
     GetPage(
       name: splashScreen,
@@ -76,6 +81,12 @@ class AppRoutes {
         CallContainerBinding(),
       ],
     ),
+    GetPage(
+        name: dialerScreen,
+        page: () => DialerScreen(),
+        bindings: [
+          DialerScreenBinding(),
+        ]),
     GetPage(
       name: contactProfileScreen,
       page: () => ContactProfileScreen(),
